@@ -3,7 +3,7 @@
 // -------------------------------
 // API layer (real or mock)
 // -------------------------------
-const BACKEND_URL = 'http://localhost:8000/api/v1/generate_mindmap';
+const BACKEND_URL = 'https://team-rahasya-upgrad-hackathon-backe-amber.vercel.app/api/v1/generate_mindmap';
 
 // Fixed mock JSON (from your sample)
 const FIXED_MOCK_RESPONSE = {
