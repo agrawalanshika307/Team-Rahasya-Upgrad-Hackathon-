@@ -38,7 +38,14 @@
                 <div class="canvas-toolbar">
                     <button id="center-root" title="Center mind map">Center Map</button>
                 </div>
-                <svg id="mindmap" class="canvas" aria-label="Mind map visualization"></svg>
+                <div id="welcome-screen" class="welcome-screen">
+                    <h1>AI Mind Map</h1>
+                    <div class="typing-text" id="typing-text">
+                        <span id="typing-content">Transform your ideas into structured learning paths...</span>
+                        <span class="typing-cursor"></span>
+                    </div>
+                </div>
+                <svg id="mindmap" class="canvas" aria-label="Mind map visualization" style="display: none;"></svg>
             </section>
         </main>
 

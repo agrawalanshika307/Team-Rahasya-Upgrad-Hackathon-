@@ -470,6 +470,10 @@ function computePositions(root, { levelHeight = 140, nodeSpacing = 180, minSpaci
 }
 
 function renderMindMap(data) {
+    // Hide welcome screen and show mind map
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('mindmap').style.display = 'block';
+    
     const hierarchy = toHierarchy(data);
     const { nodes, links } = computePositions(hierarchy);
 
@@ -694,7 +698,49 @@ form.addEventListener('submit', async (e) => {
     updateMindMapFromInput(input.value);
 });
 
-// No auto-render; wait for user input
+// Welcome screen typing animation
+const pitchSentences = [
+    "Transform your ideas into structured learning paths...",
+    "AI-powered mind maps for complex topics...",
+    "Break down any subject into digestible steps...",
+    "From concept to mastery with intelligent organization...",
+    "Turn overwhelming topics into clear roadmaps...",
+    "Your personal learning companion powered by AI..."
+];
+
+let currentSentenceIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeWriter() {
+    const typingContent = document.getElementById('typing-content');
+    const currentSentence = pitchSentences[currentSentenceIndex];
+    
+    if (isDeleting) {
+        typingContent.textContent = currentSentence.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        typingSpeed = 50;
+    } else {
+        typingContent.textContent = currentSentence.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+        typingSpeed = 100;
+    }
+    
+    if (!isDeleting && currentCharIndex === currentSentence.length) {
+        typingSpeed = 2000; // Pause at end
+        isDeleting = true;
+    } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentSentenceIndex = (currentSentenceIndex + 1) % pitchSentences.length;
+        typingSpeed = 500; // Pause before next sentence
+    }
+    
+    setTimeout(typeWriter, typingSpeed);
+}
+
+// Start typing animation
+typeWriter();
 
 // Auto-fit view to rendered content
 const observer = new ResizeObserver(() => {
